@@ -1,6 +1,6 @@
 import { Image } from '@resources/image/image.entity'
 import { Token } from '@resources/token/token.entity'
-import UserRole from '@utils/enums/user-role'
+import UserRole from '@resources/user/user-role.enum'
 import {
 	Column,
 	Entity,

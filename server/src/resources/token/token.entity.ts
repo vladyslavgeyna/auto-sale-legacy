@@ -15,7 +15,7 @@ export class Token {
 	@Column()
 	refreshToken: string
 
-	@OneToOne(() => User, user => user.token)
+	@OneToOne(() => User, user => user.token, { nullable: false })
 	@JoinColumn()
 	user: User
 }

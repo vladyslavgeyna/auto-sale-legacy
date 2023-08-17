@@ -1,5 +1,5 @@
 import UserDto from '@resources/user/dtos/user.dto'
-import UserRole from '@utils/enums/user-role'
+import UserRole from '@resources/user/user-role.enum'
 
 export default class TokenPayloadDto {
 	/**

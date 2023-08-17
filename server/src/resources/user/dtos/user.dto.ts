@@ -1,5 +1,5 @@
 import RegisterInputDto from '@resources/account/dtos/register-input.dto'
-import UserRole from '@utils/enums/user-role'
+import UserRole from '@resources/user/user-role.enum'
 import { User } from '../user.entity'
 
 export default class UserDto
