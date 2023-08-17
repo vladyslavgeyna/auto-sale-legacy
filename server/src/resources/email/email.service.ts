@@ -25,9 +25,15 @@ class EmailService {
 			subject: `Account verifying on ${process.env.API_URL}`,
 			text: '',
 			html: `
-                <div>
-                    <h1>For verifying follow the <a href="${link}">link</a></h1>
-                </div>
+				<table align="center" cellpadding="15" cellspacing="0" width="100%" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;border: 3px solid black;border-radius:30px;text-align:center;">
+					<tr>
+						<td>
+							<h1><strong>Help us protect your account</strong></h1>
+							<p>Before you sign in, we need to verify your identity.</p>
+							<h3 >For verifying follow the <strong><a href="${link}">link</a></strong>:</h3>
+						</td>
+					</tr>
+				</table>
             `
 		})
 	}

@@ -59,12 +59,10 @@ class TokenService {
 		const token = await this.tokenRepository.findOneBy({ refreshToken })
 
 		if (!token) {
-			throw HttpError.NotFound(
-				'Token by given refresh token was not found'
-			)
+			throw HttpError.UnauthorizedError()
 		}
 
-		await this.tokenRepository.delete(refreshToken)
+		await this.tokenRepository.delete(token.id)
 	}
 
 	validateRefreshToken(token: string) {

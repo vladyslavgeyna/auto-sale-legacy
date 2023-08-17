@@ -1,6 +1,13 @@
+import { Image } from '@resources/image/image.entity'
 import { Token } from '@resources/token/token.entity'
 import UserRole from '@utils/enums/user-role'
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	OneToOne,
+	PrimaryGeneratedColumn
+} from 'typeorm'
 
 @Entity()
 export class User {
@@ -9,9 +16,6 @@ export class User {
 
 	@Column({ unique: true })
 	email: string
-
-	@Column({ unique: true })
-	username: string
 
 	@Column()
 	name: string
@@ -35,6 +39,7 @@ export class User {
 	})
 	role: UserRole
 
-	@Column({ type: 'varchar', nullable: true })
-	avatar: string | null
+	@OneToOne(() => Image, { nullable: true })
+	@JoinColumn()
+	image: Image | null
 }

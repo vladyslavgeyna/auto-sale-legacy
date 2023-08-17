@@ -18,12 +18,6 @@ passwordSchema
 	.spaces()
 
 export const accountRegisterValidation = [
-	body('username')
-		.trim()
-		.notEmpty()
-		.escape()
-		.isLength({ min: 5, max: 20 })
-		.withMessage(`Username length should be 5-20 characters`),
 	body('email')
 		.trim()
 		.notEmpty()

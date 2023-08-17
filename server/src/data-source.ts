@@ -1,3 +1,4 @@
+import { Image } from '@resources/image/image.entity'
 import { Token } from '@resources/token/token.entity'
 import { User } from '@resources/user/user.entity'
 import { DataSource } from 'typeorm'
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
 	database: 'auto-sale',
 	synchronize: true,
 	logging: false,
-	entities: [User, Token],
+	entities: [User, Token, Image],
 	migrations: [],
 	subscribers: []
 })

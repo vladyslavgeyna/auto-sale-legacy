@@ -1,5 +1,6 @@
 import { AppDataSource } from '@/data-source'
 import emailService from '@resources/email/email.service'
+import { Image } from '@resources/image/image.entity'
 import imageService from '@resources/image/image.service'
 import TokenPayloadDto from '@resources/token/dtos/token-payload.dto'
 import { Token } from '@resources/token/token.entity'
@@ -12,6 +13,7 @@ import { Repository } from 'typeorm'
 import AuthOutputDto from './dtos/auth-output.dto'
 import LoginInputDto from './dtos/login-input.dto'
 import RegisterInputDto from './dtos/register-input.dto'
+import RegisterOutputDto from './dtos/register-output.dto'
 
 class AccountService {
 	private userRepository: Repository<User>
@@ -25,35 +27,31 @@ class AccountService {
 	async register(
 		registerInputDto: RegisterInputDto,
 		avatar?: Express.Multer.File
-	): Promise<AuthOutputDto> {
-		const candidate = await this.userRepository.findOne({
-			where: [
-				{ email: registerInputDto.email },
-				{ username: registerInputDto.username }
-			]
+	): Promise<RegisterOutputDto> {
+		const candidate = await this.userRepository.findOneBy({
+			email: registerInputDto.email
 		})
 
 		if (candidate) {
 			throw HttpError.BadRequest(
-				`User with email ${registerInputDto.email} and/or username ${registerInputDto.username} already exists`
+				`User with email ${registerInputDto.email} already exists`
 			)
 		}
 
-		let imageName: string | null = null
+		let createdImage: Image | null = null
 
 		if (avatar) {
-			imageName = await imageService.save(avatar)
+			createdImage = await imageService.save(avatar)
 		}
 
 		const hashedPassword = await bcrypt.hash(registerInputDto.password, 5)
 
 		const newUser = this.userRepository.create({
-			username: registerInputDto.username,
 			email: registerInputDto.email,
 			name: registerInputDto.name,
 			surname: registerInputDto.surname,
 			password: hashedPassword,
-			avatar: imageName
+			image: createdImage
 		})
 
 		const createdUser = await this.userRepository.save(newUser)
@@ -67,18 +65,11 @@ class AccountService {
 
 		const userDto = new UserDto(createdUser)
 
-		const tokens = tokenService.generateTokens(new TokenPayloadDto(userDto))
-
-		await tokenService.saveToken(userDto.id, tokens.refreshToken)
-
-		return {
-			...tokens,
-			user: userDto
-		}
+		return { user: userDto }
 	}
 
-	async verify(userId: string) {
-		const user = await this.userRepository.findOneBy({ id: userId })
+	async verify(userIdLink: string) {
+		const user = await this.userRepository.findOneBy({ id: userIdLink })
 
 		if (!user) {
 			throw HttpError.BadRequest('Incorrect verifying link')
@@ -108,6 +99,12 @@ class AccountService {
 			throw HttpError.BadRequest(`Incorrect password`)
 		}
 
+		if (!user.isVerified) {
+			throw HttpError.forbidden(
+				`User is not verified. Please, verify ${user.email} email address by following the link in received email`
+			)
+		}
+
 		const userDto = new UserDto(user)
 
 		const tokens = tokenService.generateTokens(new TokenPayloadDto(userDto))
@@ -124,7 +121,7 @@ class AccountService {
 		await tokenService.removeToken(refreshToken)
 	}
 
-	async refresh(refreshToken: string) {
+	async refresh(refreshToken: string): Promise<AuthOutputDto> {
 		if (!refreshToken) {
 			throw HttpError.UnauthorizedError()
 		}

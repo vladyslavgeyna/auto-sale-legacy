@@ -1,5 +1,4 @@
 export default interface RegisterInputDto {
-	username: string
 	email: string
 	name: string
 	surname: string

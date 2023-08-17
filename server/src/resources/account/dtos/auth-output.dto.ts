@@ -1,7 +1,6 @@
-import UserDto from '@resources/user/dtos/user.dto'
+import RegisterOutputDto from './register-output.dto'
 
-export default interface AuthOutputDto {
+export default interface AuthOutputDto extends RegisterOutputDto {
 	accessToken: string
 	refreshToken: string
-	user: UserDto
 }

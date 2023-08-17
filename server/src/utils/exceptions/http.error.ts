@@ -17,6 +17,10 @@ class HttpError extends Error {
 		)
 	}
 
+	static forbidden(message: string, errors: any[] = []) {
+		return new HttpError(HttpStatusCode.FORBIDDEN_403, message, errors)
+	}
+
 	static BadRequest(message: string, errors: any[] = []) {
 		return new HttpError(HttpStatusCode.BAD_REQUEST_400, message, errors)
 	}
