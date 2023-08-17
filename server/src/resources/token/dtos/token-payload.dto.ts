@@ -18,11 +18,6 @@ export default class TokenPayloadDto {
 	email: string
 
 	/**
-	 * User's username
-	 */
-	username: string
-
-	/**
 	 * User's role
 	 */
 	role: UserRole
@@ -30,7 +25,6 @@ export default class TokenPayloadDto {
 	constructor(userDto: UserDto) {
 		this.id = userDto.id
 		this.email = userDto.email
-		this.username = userDto.username
 		this.isVerified = userDto.isVerified
 		this.role = userDto.role
 	}
