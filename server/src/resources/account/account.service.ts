@@ -1,36 +1,23 @@
-import { AppDataSource } from '@/data-source'
 import emailService from '@resources/email/email.service'
 import { Image } from '@resources/image/image.entity'
 import imageService from '@resources/image/image.service'
 import TokenPayloadDto from '@resources/token/dtos/token-payload.dto'
-import { Token } from '@resources/token/token.entity'
 import tokenService from '@resources/token/token.service'
 import UserDto from '@resources/user/dtos/user.dto'
-import { User } from '@resources/user/user.entity'
+import userService from '@resources/user/user.service'
 import HttpError from '@utils/exceptions/http.error'
 import bcrypt from 'bcrypt'
-import { Repository } from 'typeorm'
 import AuthOutputDto from './dtos/auth-output.dto'
 import LoginInputDto from './dtos/login-input.dto'
 import RegisterInputDto from './dtos/register-input.dto'
 import RegisterOutputDto from './dtos/register-output.dto'
 
 class AccountService {
-	private userRepository: Repository<User>
-	private tokenRepository: Repository<Token>
-
-	constructor() {
-		this.userRepository = AppDataSource.getRepository(User)
-		this.tokenRepository = AppDataSource.getRepository(Token)
-	}
-
 	async register(
 		registerInputDto: RegisterInputDto,
 		avatar?: Express.Multer.File
 	): Promise<RegisterOutputDto> {
-		const candidate = await this.userRepository.findOneBy({
-			email: registerInputDto.email
-		})
+		const candidate = await userService.getByEmail(registerInputDto.email)
 
 		if (candidate) {
 			throw HttpError.BadRequest(
@@ -46,15 +33,13 @@ class AccountService {
 
 		const hashedPassword = await bcrypt.hash(registerInputDto.password, 5)
 
-		const newUser = this.userRepository.create({
+		const createdUser = await userService.create({
 			email: registerInputDto.email,
 			name: registerInputDto.name,
 			surname: registerInputDto.surname,
 			password: hashedPassword,
 			image: createdImage
 		})
-
-		const createdUser = await this.userRepository.save(newUser)
 
 		const verificationLink = `${process.env.API_URL}/api/account/verify/${createdUser.id}`
 
@@ -69,20 +54,11 @@ class AccountService {
 	}
 
 	async verify(userIdLink: string) {
-		const user = await this.userRepository.findOneBy({ id: userIdLink })
-
-		if (!user) {
-			throw HttpError.BadRequest('Incorrect verifying link')
-		}
-
-		user.isVerified = true
-		await this.userRepository.save(user)
+		await userService.verify(userIdLink)
 	}
 
 	async login(loginInputDto: LoginInputDto): Promise<AuthOutputDto> {
-		const user = await this.userRepository.findOneBy({
-			email: loginInputDto.email
-		})
+		const user = await userService.getByEmail(loginInputDto.email)
 
 		if (!user) {
 			throw HttpError.BadRequest(
@@ -127,15 +103,16 @@ class AccountService {
 		}
 
 		const userData = tokenService.validateRefreshToken(refreshToken)
-		const tokenFromDatabase = await this.tokenRepository.findOneBy({
+
+		const tokenFromDatabase = await tokenService.getByRefreshToken(
 			refreshToken
-		})
+		)
 
 		if (!userData || !tokenFromDatabase) {
 			throw HttpError.UnauthorizedError()
 		}
 
-		const user = await this.userRepository.findOneBy({ id: userData.id })
+		const user = await userService.getById(userData.id)
 
 		if (!user) {
 			throw HttpError.NotFound('Can not find user by token payload id')

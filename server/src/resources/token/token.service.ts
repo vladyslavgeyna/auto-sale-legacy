@@ -14,6 +14,14 @@ class TokenService {
 		this.tokenRepository = AppDataSource.getRepository(Token)
 	}
 
+	async getByRefreshToken(refreshToken: string) {
+		const token = await this.tokenRepository.findOneBy({
+			refreshToken
+		})
+
+		return token
+	}
+
 	generateTokens(payload: TokenPayloadDto) {
 		const accessToken = jwt.sign(
 			{ ...payload },
