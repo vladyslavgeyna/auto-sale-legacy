@@ -93,7 +93,7 @@ class TokenService {
 				String(process.env.JWT_ACCESS_SECRET)
 			)
 
-			return userData
+			return userData as TokenPayloadDto
 		} catch (error) {
 			return null
 		}
