@@ -75,7 +75,12 @@ h6 {
 	font-size: inherit;
 	font-weight: inherit;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s;
+}
 body,
 html {
 	height: 100%;

@@ -14,7 +14,6 @@
 	flex-direction: column;
 	gap: 15px;
 }
-
 .title {
 	text-align: center;
 	margin-bottom: 30px;
@@ -33,4 +32,12 @@
 			text-decoration: underline;
 		}
 	}
+}
+.errorMessage {
+	padding: 5px;
+}
+.serverError {
+	margin-top: -20px;
+	font-size: 16px;
+	margin-bottom: 20px;
 }

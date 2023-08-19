@@ -1,8 +1,4 @@
-import {
-	FetchArgs,
-	createApi,
-	fetchBaseQuery
-} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '../../../config'
 import { IAuthResponse } from '../../types/auth-response.interface'
 import { userActions } from '../user/user.slice'
@@ -19,11 +15,7 @@ const baseQuery = fetchBaseQuery({
 	}
 })
 
-const baseQueryWithReauth = async (
-	args: string | FetchArgs,
-	api: any,
-	extraOptions: any
-) => {
+const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 	let result = await baseQuery(args, api, extraOptions)
 
 	if (result?.error?.status === 401) {

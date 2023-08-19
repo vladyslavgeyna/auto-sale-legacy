@@ -6,10 +6,12 @@ const PrimaryButton: FC<
 		type?: 'button' | 'submit' | 'reset' | undefined
 		className?: string
 		style?: React.CSSProperties
+		disabled?: boolean
 	}>
-> = ({ type, children, className, style }) => {
+> = ({ type, children, className, style, disabled = false }) => {
 	return (
 		<button
+			disabled={disabled}
 			style={style}
 			className={`${className} ${styles.button}`}
 			type={type}>
