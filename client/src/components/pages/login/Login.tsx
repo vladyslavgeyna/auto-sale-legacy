@@ -17,7 +17,6 @@ const Login = () => {
 	const {
 		handleSubmit,
 		register,
-		getValues,
 		formState: { errors, isValid, isDirty },
 		reset
 	} = useForm<ILoginInput>({
@@ -35,6 +34,7 @@ const Login = () => {
 		} catch (error) {
 			console.log(error)
 		}
+		reset()
 	}
 
 	useEffect(() => {

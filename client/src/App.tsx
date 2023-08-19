@@ -1,26 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Router from './components/Router'
 import { useActions } from './hooks/useActions'
 import { useTypedSelector } from './hooks/useTypedSelector'
 
 function App() {
+	const { user } = useTypedSelector(state => state.user)
 	const { checkAuth } = useActions()
 
-	const { isLoading } = useTypedSelector(state => state.user)
+	const { isLoading, isAuthenticated } = useTypedSelector(state => state.user)
+
+	const [isCheckingFinished, setIsCheckingFinished] = useState(false)
 
 	useEffect(() => {
-		console.log('useEffect')
-
 		if (localStorage.getItem('token')) {
-			console.log('checkAuth')
-
 			checkAuth()
+			setIsCheckingFinished(true)
 		}
 	}, [])
 
-	if (!isLoading) {
-		return <Router />
+	if (isLoading || !isCheckingFinished) {
+		return <p>Loading...</p>
 	}
+
+	return <Router />
 }
 
 export default App
