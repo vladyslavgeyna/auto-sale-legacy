@@ -1,10 +1,12 @@
 import { bindActionCreators } from '@reduxjs/toolkit'
 import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import * as userActions from '../store/user/user.actions.js'
+import * as userApiActions from '../store/user/user.actions.ts'
+import { userActions } from '../store/user/user.slice'
 
 const rootActions = {
-	...userActions
+	...userActions,
+	...userApiActions
 }
 
 export const useActions = () => {
