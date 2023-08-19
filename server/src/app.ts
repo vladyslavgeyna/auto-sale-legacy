@@ -31,7 +31,12 @@ class App {
 		this.app.use(express.static(path.join(__dirname, '../public')))
 		this.app.use(cookieParser())
 		this.app.use(express.json())
-		this.app.use(cors())
+		this.app.use(
+			cors({
+				credentials: true,
+				origin: 'http://localhost:5173'
+			})
+		)
 	}
 
 	private initializeErrorHandling() {
