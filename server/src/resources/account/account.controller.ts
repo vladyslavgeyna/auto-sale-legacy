@@ -76,6 +76,7 @@ class AccountController {
 	async logout(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { refreshToken } = req.cookies
+
 			await accountService.logout(refreshToken)
 			res.clearCookie('refreshToken')
 			return res.sendStatus(HttpStatusCode.NO_CONTENT_204)
