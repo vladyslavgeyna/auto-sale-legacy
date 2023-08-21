@@ -8,7 +8,8 @@ const initialState: IUserState = {
 	isLoading: false,
 	error: null,
 	user: {} as IUser,
-	isAuthenticated: false
+	isAuthenticated: false,
+	isCheckingAuthFinished: false
 }
 
 export const userSlice = createSlice({
@@ -20,10 +21,13 @@ export const userSlice = createSlice({
 			state.isAuthenticated = true
 			localStorage.setItem('token', action.payload.accessToken)
 		},
-		logOut: state => {
+		logoutLocally: state => {
 			state.user = {} as IUser
 			state.isAuthenticated = false
 			localStorage.removeItem('token')
+		},
+		setIsCheckingAuthFinished: (state, action: PayloadAction<boolean>) => {
+			state.isCheckingAuthFinished = action.payload
 		}
 	},
 	extraReducers: builder => {

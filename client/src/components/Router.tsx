@@ -3,6 +3,7 @@ import RequireNotAuth from './helpers/RequireNotAuth'
 import Layout from './layout/Layout'
 import Login from './pages/login/Login'
 import NotFound from './pages/not-found/NotFound'
+import Register from './pages/register/Register'
 
 const Router = () => {
 	return (
@@ -19,7 +20,14 @@ const Router = () => {
 							}
 							path='login'
 						/>
-						<Route element={<p>Register</p>} path='register' />
+						<Route
+							element={
+								<RequireNotAuth>
+									<Register />
+								</RequireNotAuth>
+							}
+							path='register'
+						/>
 						<Route element={<NotFound />} path='*' />
 					</Route>
 

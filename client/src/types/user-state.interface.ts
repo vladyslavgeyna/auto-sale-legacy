@@ -5,4 +5,5 @@ export interface IUserState {
 	error: any
 	user: IUser
 	isAuthenticated: boolean
+	isCheckingAuthFinished: boolean
 }

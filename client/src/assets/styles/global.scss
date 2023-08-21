@@ -108,3 +108,11 @@ main {
 a.active {
 	text-decoration: underline;
 }
+
+.appearPage-appear {
+	opacity: 0;
+}
+.appearPage-appear-active {
+	opacity: 1;
+	transition: opacity 1000ms;
+}

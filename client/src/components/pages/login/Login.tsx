@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useActions } from '../../../hooks/useActions'
 import { useGetFormError } from '../../../hooks/useGetFormError'
 import { useLoginMutation } from '../../../store/api/user.api'
 import { IHttpError } from '../../../types/http-error.interface'
 import { ILoginInput } from '../../../types/login-input.interface'
 import { EMAIL_REGEXP } from '../../../utils/validation'
+import BarLoader from '../../ui/bar-loader/BarLoader'
 import FloatInput from '../../ui/float-input/FloatInput'
 import FormErrorMessage from '../../ui/form-error-message/FormErrorMessage'
 import PrimaryButton from '../../ui/primary-button/PrimaryButton'
@@ -34,11 +35,11 @@ const Login = () => {
 		} catch (error) {
 			console.log(error)
 		}
-		reset()
 	}
 
 	useEffect(() => {
 		if (data && isSuccess) {
+			reset()
 			setCredentials(data)
 			navigate('/')
 		}
@@ -46,11 +47,21 @@ const Login = () => {
 
 	const getError = useGetFormError(styles.errorMessage)
 
+	const [searchParams] = useSearchParams()
+
 	return (
 		<div className={styles.wrapper}>
+			{searchParams.get('verified') && (
+				<div className={styles.verifiedWrapper}>
+					<h3 className={styles.verifiedTitle}>
+						Your email address is successfully verified
+					</h3>
+					<p className={styles.verifiedText}>Now you can log in</p>
+				</div>
+			)}
 			<PrimaryTitle className={styles.title}>Authorization</PrimaryTitle>
 			{isLoading ? (
-				<p>Loading...</p>
+				<BarLoader text='Loading...' />
 			) : error ? (
 				<FormErrorMessage className={styles.serverError}>
 					{(error as IHttpError).data.message}

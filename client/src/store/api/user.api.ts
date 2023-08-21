@@ -1,5 +1,6 @@
 import { IAuthResponse } from '../../types/auth-response.interface'
 import { ILoginInput } from '../../types/login-input.interface'
+import { IRegisterInput } from '../../types/register-input.interface'
 import { api } from './api'
 
 export const userApi = api.injectEndpoints({
@@ -12,8 +13,38 @@ export const userApi = api.injectEndpoints({
 					...credentials
 				}
 			})
+		}),
+		logout: builder.mutation({
+			query: () => ({
+				url: '/account/logout',
+				method: 'POST'
+			})
+		}),
+		register: builder.mutation<IAuthResponse, IRegisterInput>({
+			query: credentials => {
+				const formData = new FormData()
+
+				if (credentials?.avatar && credentials?.avatar.length) {
+					formData.append('avatar', credentials.avatar[0])
+				}
+
+				formData.append('name', credentials.name)
+				formData.append('surname', credentials.surname)
+				formData.append('email', credentials.email)
+				formData.append('password', credentials.password)
+				formData.append('passwordConfirm', credentials.passwordConfirm)
+				formData.append('phone', credentials.phone)
+
+				return {
+					url: '/account/register',
+					method: 'POST',
+					body: formData,
+					formData: true
+				}
+			}
 		})
 	})
 })
 
-export const { useLoginMutation } = userApi
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
+	userApi

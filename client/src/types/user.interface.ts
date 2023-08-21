@@ -5,5 +5,6 @@ export interface IUser {
 	id: string
 	isVerified: boolean
 	role: string
+	phone: string
 	avatarPath: string | null
 }

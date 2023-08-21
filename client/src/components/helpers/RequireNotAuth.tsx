@@ -4,7 +4,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 const RequireNotAuth: FC<PropsWithChildren> = ({ children }) => {
 	const { isAuthenticated } = useTypedSelector(state => state.user)
-
 	if (isAuthenticated) {
 		return <Navigate to={'/'} />
 	}

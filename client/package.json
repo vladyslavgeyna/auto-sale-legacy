@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-transition-group": "^4.4.6",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
+    "react-number-formatter": "^1.0.20",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
+    "react-spinner-animated": "^3.1.1",
+    "react-transition-group": "^4.4.5",
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
