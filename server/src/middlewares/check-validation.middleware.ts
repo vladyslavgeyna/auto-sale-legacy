@@ -7,6 +7,8 @@ const checkValidationMiddleware = (
 	res: Response,
 	next: NextFunction
 ) => {
+	console.log('checkValidationMiddleware')
+
 	const errors = validationResult(req)
 
 	if (!errors.isEmpty()) {

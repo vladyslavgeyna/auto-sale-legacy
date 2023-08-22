@@ -2,11 +2,14 @@ import HttpError from '@utils/exceptions/http.error'
 import { NextFunction, Request, Response } from 'express'
 
 export const imageSizeValidation =
-	(maxSizeInMB: number) =>
+	(maxSizeInMB: number, isImageRequired: boolean) =>
 	(req: Request, res: Response, next: NextFunction) => {
 		const image = req.file
 
 		if (!image) {
+			if (isImageRequired) {
+				return next(HttpError.BadRequest('Image is required'))
+			}
 			return next()
 		}
 

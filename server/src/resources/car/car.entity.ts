@@ -2,11 +2,11 @@ import { CarBrand } from '@resources/car-brand/car-brand.entity'
 import { CarModel } from '@resources/car-model/car-model.entity'
 import { Currency } from '@resources/currency/currency.entity'
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Color } from './enums/color'
-import { Fuel } from './enums/fuel'
-import { Region } from './enums/region'
-import { Transmission } from './enums/transmission'
-import { WheelDrive } from './enums/wheel-drive'
+import { Color } from './enums/color.enum'
+import { Fuel } from './enums/fuel.enum'
+import { Region } from './enums/region.enum'
+import { Transmission } from './enums/transmission.enum'
+import { WheelDrive } from './enums/wheel-drive.enum'
 
 @Entity()
 export class Car {
@@ -35,19 +35,19 @@ export class Car {
 		type: 'enum',
 		enum: Color
 	})
-	Color: Color
+	color: Color
 
 	@Column({
 		type: 'enum',
 		enum: Transmission
 	})
-	Transmission: Transmission
+	transmission: Transmission
 
 	@Column({
 		type: 'enum',
 		enum: Region
 	})
-	Region: Region
+	region: Region
 
 	@Column('money')
 	price: number

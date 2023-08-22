@@ -27,7 +27,7 @@ export class CarAd {
 	@Column({ type: 'timestamp' })
 	dateOfCreation: Date
 
-	@Column()
+	@Column({ default: true })
 	isActive: boolean
 
 	@ManyToOne(() => User, { nullable: false })
