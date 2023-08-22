@@ -5,5 +5,6 @@ export default interface CreateUserInputDto {
 	name: string
 	surname: string
 	password: string
+	phone: string
 	image: Image | null
 }

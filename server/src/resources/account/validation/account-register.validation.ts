@@ -36,6 +36,14 @@ export const accountRegisterValidation = [
 		.escape()
 		.isLength({ min: 2, max: 100 })
 		.withMessage(`Surname length should be 5-100 characters`),
+	body('phone')
+		.trim()
+		.notEmpty()
+		.escape()
+		.matches(
+			/^(050|066|095|099|063|073|093|067|068|096|097|098|091|092|094)\d{3}\d{2}\d{2}$/
+		)
+		.withMessage(`Not valid phone number`),
 	body('password')
 		.trim()
 		.notEmpty()
@@ -51,7 +59,7 @@ export const accountRegisterValidation = [
 					error.message.replace('string', 'password')
 				)
 				throw new Error(
-					'Invalid password: ' + validationErrors.join(', ')
+					'Invalid password: ' + validationErrors.join('. ')
 				)
 			}
 			return true

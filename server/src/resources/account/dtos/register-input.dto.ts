@@ -3,5 +3,6 @@ export default interface RegisterInputDto {
 	name: string
 	surname: string
 	password: string
+	phone: string
 	passwordConfirm: string
 }

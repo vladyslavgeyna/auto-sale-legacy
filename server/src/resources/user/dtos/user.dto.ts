@@ -12,6 +12,7 @@ export default class UserDto
 	isVerified: boolean
 	role: UserRole
 	avatarPath: string | null
+	phone: string
 
 	constructor(user: User) {
 		this.email = user.email
@@ -20,6 +21,7 @@ export default class UserDto
 		this.id = user.id
 		this.isVerified = user.isVerified
 		this.role = user.role
+		this.phone = user.phone
 		this.avatarPath = user.image
 			? process.env.API_URL + `/images/${user.image.name}`
 			: user.image

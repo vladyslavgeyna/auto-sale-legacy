@@ -19,7 +19,7 @@ class AccountController {
 		next: NextFunction
 	) {
 		try {
-			const userData = await accountService.register(req.body, req.file)
+			const userData = await accountService.register(req.body, req?.file)
 
 			return res.json(userData)
 		} catch (error) {
@@ -53,7 +53,9 @@ class AccountController {
 
 			await accountService.verify(userIdLink)
 
-			return res.redirect(String(process.env.CLIENT_URL))
+			return res.redirect(
+				String(process.env.CLIENT_URL) + '/account/login?verified=true'
+			)
 		} catch (error) {
 			next(error)
 		}
@@ -79,6 +81,7 @@ class AccountController {
 
 			await accountService.logout(refreshToken)
 			res.clearCookie('refreshToken')
+
 			return res.sendStatus(HttpStatusCode.NO_CONTENT_204)
 		} catch (error) {
 			next(error)

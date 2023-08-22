@@ -17,11 +17,23 @@ class AccountService {
 		registerInputDto: RegisterInputDto,
 		avatar?: Express.Multer.File
 	): Promise<RegisterOutputDto> {
-		const candidate = await userService.getByEmail(registerInputDto.email)
+		const candidateByEmail = await userService.getByEmail(
+			registerInputDto.email
+		)
 
-		if (candidate) {
+		const candidateByPhone = await userService.getByPhone(
+			registerInputDto.phone
+		)
+
+		if (candidateByEmail) {
 			throw HttpError.BadRequest(
 				`User with email ${registerInputDto.email} already exists`
+			)
+		}
+
+		if (candidateByPhone) {
+			throw HttpError.BadRequest(
+				`User with phone ${registerInputDto.phone} already exists`
 			)
 		}
 
@@ -31,13 +43,14 @@ class AccountService {
 			createdImage = await imageService.save(avatar)
 		}
 
-		const hashedPassword = await bcrypt.hash(registerInputDto.password, 5)
+		const hashedPassword = await bcrypt.hash(registerInputDto.password, 3)
 
 		const createdUser = await userService.create({
 			email: registerInputDto.email,
 			name: registerInputDto.name,
 			surname: registerInputDto.surname,
 			password: hashedPassword,
+			phone: registerInputDto.phone,
 			image: createdImage
 		})
 

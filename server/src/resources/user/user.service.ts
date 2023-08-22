@@ -36,6 +36,14 @@ class UserService {
 		return user
 	}
 
+	async getByPhone(phone: string) {
+		const user = await this.userRepository.findOneBy({
+			phone
+		})
+
+		return user
+	}
+
 	async create(user: CreateUserInputDto) {
 		const newUser = this.userRepository.create(user)
 
