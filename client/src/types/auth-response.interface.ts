@@ -1,7 +1,6 @@
-import { IUser } from './user.interface'
+import { IRegisterResponse } from './register-response.interface'
 
-export interface IAuthResponse {
+export interface IAuthResponse extends IRegisterResponse {
 	accessToken: string
 	refreshToken: string
-	user: IUser
 }

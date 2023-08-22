@@ -1,6 +1,7 @@
 import { IAuthResponse } from '../../types/auth-response.interface'
 import { ILoginInput } from '../../types/login-input.interface'
 import { IRegisterInput } from '../../types/register-input.interface'
+import { IRegisterResponse } from '../../types/register-response.interface'
 import { api } from './api'
 
 export const userApi = api.injectEndpoints({
@@ -20,7 +21,7 @@ export const userApi = api.injectEndpoints({
 				method: 'POST'
 			})
 		}),
-		register: builder.mutation<IAuthResponse, IRegisterInput>({
+		register: builder.mutation<IRegisterResponse, IRegisterInput>({
 			query: credentials => {
 				const formData = new FormData()
 
