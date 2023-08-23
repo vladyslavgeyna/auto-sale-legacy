@@ -3,14 +3,14 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { useGetFormError } from '../../../hooks/useGetFormError'
 import { useRegisterMutation } from '../../../store/api/user.api'
-import { IHttpError } from '../../../types/http-error.interface'
-import { IRegisterInput } from '../../../types/register-input.interface'
+import { IRegisterInput } from '../../../types/user/register-input.interface'
 import { formatFileName } from '../../../utils/utils'
 import {
 	EMAIL_REGEXP,
 	PHONE_NUMBER_REGEXP,
 	validateImage
 } from '../../../utils/validation'
+import Error from '../../Error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import FloatInput from '../../ui/float-input/FloatInput'
 import FormErrorMessage from '../../ui/form-error-message/FormErrorMessage'
@@ -110,23 +110,17 @@ const Register = () => {
 	return (
 		<div className={styles.wrapper}>
 			<PrimaryTitle className={styles.title}>Registration</PrimaryTitle>
+
 			{isLoading ? (
 				<BarLoader text='Loading...' />
-			) : error ? (
-				(error as IHttpError).data.errors?.length ? (
-					(error as IHttpError).data.errors?.map(err => (
-						<FormErrorMessage className={styles.serverError}>
-							{err.msg}
-						</FormErrorMessage>
-					))
-				) : (
-					<FormErrorMessage className={styles.serverError}>
-						{(error as IHttpError).data.message}
-					</FormErrorMessage>
-				)
 			) : (
-				''
+				<Error
+					error={error}
+					Component={FormErrorMessage}
+					className={styles.serverError}
+				/>
 			)}
+
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className={styles.form}

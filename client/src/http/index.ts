@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IAuthResponse } from '../types/auth-response.interface'
+import { IAuthResponse } from '../types/user/auth-response.interface'
 import { API_URL } from './../../config'
 
 const axiosInstance = axios.create({

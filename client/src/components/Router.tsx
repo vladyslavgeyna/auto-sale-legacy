@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import RequireNotAuth from './helpers/RequireNotAuth'
 import Layout from './layout/Layout'
+import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import NotFound from './pages/not-found/NotFound'
 import Register from './pages/register/Register'
@@ -10,7 +11,7 @@ const Router = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<Layout />}>
-					<Route element={<hr />} index />
+					<Route element={<Home />} index />
 					<Route path='account/*'>
 						<Route
 							element={

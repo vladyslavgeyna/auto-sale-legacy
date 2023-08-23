@@ -4,9 +4,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useActions } from '../../../hooks/useActions'
 import { useGetFormError } from '../../../hooks/useGetFormError'
 import { useLoginMutation } from '../../../store/api/user.api'
-import { IHttpError } from '../../../types/http-error.interface'
-import { ILoginInput } from '../../../types/login-input.interface'
+import { ILoginInput } from '../../../types/user/login-input.interface'
 import { EMAIL_REGEXP } from '../../../utils/validation'
+import Error from '../../Error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import FloatInput from '../../ui/float-input/FloatInput'
 import FormErrorMessage from '../../ui/form-error-message/FormErrorMessage'
@@ -60,15 +60,17 @@ const Login = () => {
 				</div>
 			)}
 			<PrimaryTitle className={styles.title}>Authorization</PrimaryTitle>
+
 			{isLoading ? (
 				<BarLoader text='Loading...' />
-			) : error ? (
-				<FormErrorMessage className={styles.serverError}>
-					{(error as IHttpError).data.message}
-				</FormErrorMessage>
 			) : (
-				''
+				<Error
+					error={error}
+					Component={FormErrorMessage}
+					className={styles.serverError}
+				/>
 			)}
+
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className={styles.form}

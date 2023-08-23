@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '../../../config'
-import { IAuthResponse } from '../../types/auth-response.interface'
+import { IAuthResponse } from '../../types/user/auth-response.interface'
 import { userActions } from '../user/user.slice'
 
 const baseQuery = fetchBaseQuery({
