@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap');
+@import './variables.scss';
+
 * {
 	padding: 0;
 	margin: 0;
@@ -115,4 +117,47 @@ a.active {
 .appearPage-appear-active {
 	opacity: 1;
 	transition: opacity 1000ms;
+}
+.visually-hidden {
+	display: none;
+}
+.pagination {
+	overflow: hidden;
+	box-sizing: border-box !important;
+	border-radius: $border-radius;
+	border: 1px solid #c9c9c9;
+	font-size: 18px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	background-color: white;
+	color: $primary-color;
+	li {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		transition: $transition;
+		&.disabled {
+			opacity: 0.75;
+		}
+		&:last-child {
+			border-right: none;
+		}
+		&:hover:not(.disabled):not(.active) {
+			background-color: #eee;
+		}
+		border-right: 1px solid #c9c9c9;
+		cursor: pointer;
+		// padding: 10px 12px;
+		.page-link {
+			padding: 10px 12px;
+		}
+		a {
+			display: inline-block;
+		}
+		&.active {
+			background-color: $primary-color;
+			color: white;
+		}
+	}
 }

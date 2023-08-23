@@ -15,22 +15,24 @@ const Error: FC<{
 		return (
 			<Component className={className}>Internal server error</Component>
 		)
-	} else if (error) {
-		if ((error as IHttpError).data.errors?.length) {
-			return (error as IHttpError).data.errors?.map((err, index) => (
-				<Component key={index} className={className}>
-					{err.msg}
-				</Component>
-			))
-		} else {
-			return (
-				<Component className={className}>
-					{(error as IHttpError).data.message}
-				</Component>
-			)
-		}
+	} else if ((error as IHttpError).data?.errors?.length) {
+		return (error as IHttpError).data.errors?.map((err, index) => (
+			<Component key={index} className={className}>
+				{err.msg}
+			</Component>
+		))
+	} else if ((error as IHttpError)?.data?.message) {
+		return (
+			<Component className={className}>
+				{(error as IHttpError).data.message}
+			</Component>
+		)
 	} else {
-		return ''
+		return (
+			<Component className={className}>
+				Unexpected error occurred
+			</Component>
+		)
 	}
 }
 

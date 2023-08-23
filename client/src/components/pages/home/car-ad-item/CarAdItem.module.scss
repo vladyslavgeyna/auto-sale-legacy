@@ -1,0 +1,59 @@
+@import '../../../../assets/styles/variables.scss';
+
+.column {
+	border: 1px solid #c9c9c9;
+	border-radius: $border-radius;
+}
+.item {
+	height: 100%;
+	padding: 10px;
+}
+.imageWrapper {
+	overflow: hidden;
+	position: relative;
+	padding: 0 0 60% 0;
+	border-radius: $border-radius;
+}
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.infoWrapper {
+	margin-top: 10px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+}
+.info {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	font-size: 14px;
+}
+.link {
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+.title {
+	transition: $transition;
+	font-weight: 600;
+	color: $primary-color;
+	font-size: 20px;
+	margin-top: 15px;
+	&:hover {
+		color: $primary-color-hover;
+	}
+}
+.price {
+	font-weight: 600;
+	font-size: 18px;
+	margin-top: 15px;
+}
+.about {
+	padding: 0 10px;
+}

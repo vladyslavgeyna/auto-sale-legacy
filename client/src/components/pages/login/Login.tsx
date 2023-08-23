@@ -63,12 +63,14 @@ const Login = () => {
 
 			{isLoading ? (
 				<BarLoader text='Loading...' />
-			) : (
+			) : error ? (
 				<Error
 					error={error}
 					Component={FormErrorMessage}
 					className={styles.serverError}
 				/>
+			) : (
+				''
 			)}
 
 			<form

@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.22",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-transition-group": "^4.4.6",
     "axios": "^1.4.0",
     "react": "^18.2.0",
+    "react-bootstrap-pagination-control": "^1.0.5",
     "react-dom": "^18.2.0",
+    "react-fancybox": "^0.2.5",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
     "react-number-formatter": "^1.0.20",

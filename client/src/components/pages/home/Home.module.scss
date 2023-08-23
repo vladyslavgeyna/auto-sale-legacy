@@ -3,3 +3,26 @@
 	font-size: 30px;
 	font-weight: bold;
 }
+.wrapper {
+}
+.rows {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 25px;
+}
+.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.topText {
+	font-size: 22px;
+	font-weight: bold;
+}
+.paginationWrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
