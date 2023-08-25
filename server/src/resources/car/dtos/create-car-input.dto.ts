@@ -23,8 +23,6 @@ export default interface CreateCarInputDto {
 
 	price: number
 
-	currency: { id: number }
-
 	wheelDrive: WheelDrive
 
 	numberOfSeats: number

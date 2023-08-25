@@ -4,6 +4,7 @@ import { Region } from '@resources/car/enums/region.enum'
 import { Transmission } from '@resources/car/enums/transmission.enum'
 import { WheelDrive } from '@resources/car/enums/wheel-drive.enum'
 import { hasEnumValue } from '@utils/enums/enum-helpers'
+import { getCurrentYear } from '@utils/utils'
 import { body } from 'express-validator'
 
 export const createCarAdValidation = [
@@ -26,19 +27,13 @@ export const createCarAdValidation = [
 		.withMessage(
 			`Additional options should be less than 150 characters long`
 		),
-	body('yearOfProduction').trim().notEmpty(),
-	// .escape(),
-	// .not()
-	// .isDate()
-	// // .isInt()
-	// .custom(value => {
-	// 	if (Number(value) > getCurrentYear() || Number(value) < 1900) {
-	// 		throw new Error(
-	// 			`Year of production should be from 1900 to ${getCurrentYear()}`
-	// 		)
-	// 	}
-	// 	return true
-	// }),
+	body('yearOfProduction')
+		.trim()
+		.notEmpty()
+		.isInt({ min: 1900, max: getCurrentYear })
+		.withMessage(
+			`Year of production should be from 1900 to ${getCurrentYear}`
+		),
 	body('color')
 		.trim()
 		.notEmpty()
@@ -108,13 +103,6 @@ export const createCarAdValidation = [
 		.escape()
 		.isInt()
 		.withMessage('Invalid car model'),
-
-	body('currencyId')
-		.trim()
-		.notEmpty()
-		.escape()
-		.isInt()
-		.withMessage('Invalid currency'),
 	body('engineCapacity')
 		.trim()
 		.notEmpty()

@@ -4,7 +4,6 @@ import { CarComparison } from '@resources/car-comparison/car-comparison.entity'
 import { CarImage } from '@resources/car-image/car-image.entity'
 import { CarModel } from '@resources/car-model/car-model.entity'
 import { Car } from '@resources/car/car.entity'
-import { Currency } from '@resources/currency/currency.entity'
 import { FavoriteAd } from '@resources/favorite-ad/favorite-ad.entity'
 import { Image } from '@resources/image/image.entity'
 import { Token } from '@resources/token/token.entity'
@@ -29,7 +28,6 @@ export const AppDataSource = new DataSource({
 		CarAd,
 		CarModel,
 		CarBrand,
-		Currency,
 		CarImage,
 		UserReview,
 		FavoriteAd,

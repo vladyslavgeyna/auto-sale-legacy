@@ -170,16 +170,6 @@ const Register = () => {
 						className={styles.input}
 						register={register('email', {
 							required: 'Email is required',
-							minLength: {
-								value: 6,
-								message:
-									'Password length should be at least 6 symbols'
-							},
-							maxLength: {
-								value: 50,
-								message: 'Maximum name length is 50 symbols'
-							},
-
 							pattern: {
 								value: EMAIL_REGEXP,
 								message: 'Please enter a valid email'

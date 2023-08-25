@@ -18,7 +18,8 @@ export class CarImage {
 	@JoinColumn()
 	image: Image
 
-	@ManyToOne(() => Car, { nullable: false })
+	@ManyToOne(() => Car, car => car.carImages, { nullable: false })
+	@JoinColumn()
 	car: Car
 
 	@Column({ default: false })

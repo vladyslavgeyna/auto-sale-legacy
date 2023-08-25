@@ -1,7 +1,13 @@
 import { CarBrand } from '@resources/car-brand/car-brand.entity'
+import { CarImage } from '@resources/car-image/car-image.entity'
 import { CarModel } from '@resources/car-model/car-model.entity'
-import { Currency } from '@resources/currency/currency.entity'
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+	Column,
+	Entity,
+	ManyToOne,
+	OneToMany,
+	PrimaryGeneratedColumn
+} from 'typeorm'
 import { Color } from './enums/color.enum'
 import { Fuel } from './enums/fuel.enum'
 import { Region } from './enums/region.enum'
@@ -49,11 +55,8 @@ export class Car {
 	})
 	region: Region
 
-	@Column('money')
+	@Column({ type: 'integer' })
 	price: number
-
-	@ManyToOne(() => Currency, { nullable: false })
-	currency: Currency
 
 	@Column({
 		type: 'enum',
@@ -69,4 +72,7 @@ export class Car {
 
 	@Column({ type: 'text', nullable: true })
 	additionalOptions: string | null
+
+	@OneToMany(() => CarImage, carImage => carImage.car, { nullable: false })
+	carImages: CarImage[]
 }

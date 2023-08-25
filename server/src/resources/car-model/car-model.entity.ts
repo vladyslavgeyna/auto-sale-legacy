@@ -10,5 +10,5 @@ export class CarModel {
 	name: string
 
 	@ManyToOne(() => CarBrand, { nullable: false })
-	CarBrand: CarBrand
+	carBrand: CarBrand
 }

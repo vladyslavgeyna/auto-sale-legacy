@@ -17,6 +17,14 @@ class CarImageService {
 
 		return createdCarImage
 	}
+
+	async getMainCarImageByCarId(carId: number) {
+		const carImage = await this.carImageRepository.findOneBy({
+			car: { id: carId }
+		})
+
+		return carImage
+	}
 }
 
 export default new CarImageService()

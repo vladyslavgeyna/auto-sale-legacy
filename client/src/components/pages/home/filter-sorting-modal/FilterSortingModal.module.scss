@@ -1,0 +1,24 @@
+.modalHeader {
+	font-weight: 600;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.modalBody {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	row-gap: 10px;
+	column-gap: 30px;
+}
+.modalFooter {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	gap: 10px;
+}
+.complexFormItem {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}

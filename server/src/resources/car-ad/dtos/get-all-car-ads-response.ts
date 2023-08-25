@@ -1,5 +1,4 @@
-export interface ICarAdData {
-	id: number
+export class CarAdDto {
 	title: string
 	price: number
 	mileage: number
@@ -10,7 +9,7 @@ export interface ICarAdData {
 	image: string
 }
 
-export interface IGetCarAdsResponse {
+export interface GetAllCarAdsResponse {
+	carAds: CarAdDto[]
 	count: number
-	carAds: ICarAdData[]
 }

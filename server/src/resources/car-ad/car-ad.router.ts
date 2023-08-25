@@ -20,4 +20,6 @@ router.post(
 	carAdController.create
 )
 
+router.get('/', carAdController.getAll)
+
 export default router

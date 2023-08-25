@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { api } from './api/api'
-import { carAdsSlice } from './car-ad/car-ad.slice'
+import { carAdsSlice } from './car-ad/car-ads.slice'
 import { userSlice } from './user/user.slice'
 
 const reducers = combineReducers({

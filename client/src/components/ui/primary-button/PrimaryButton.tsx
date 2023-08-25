@@ -7,10 +7,12 @@ const PrimaryButton: FC<
 		className?: string
 		style?: React.CSSProperties
 		disabled?: boolean
+		onClick?: () => void
 	}>
-> = ({ type, children, className, style, disabled = false }) => {
+> = ({ type, children, className, style, onClick, disabled = false }) => {
 	return (
 		<button
+			onClick={onClick}
 			disabled={disabled}
 			style={style}
 			className={`${className} ${styles.button}`}

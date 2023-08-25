@@ -6,6 +6,7 @@ import { AppDataSource } from './data-source'
 import errorMiddleware from './middlewares/error.middleware'
 import accountRouter from './resources/account/account.router'
 import carAdRouter from './resources/car-ad/car-ad.router'
+import carRouter from './resources/car/car.router'
 
 class App {
 	private port: number
@@ -23,6 +24,7 @@ class App {
 	private initializeRoutes() {
 		this.app.use(this.getRouteUri('account'), accountRouter)
 		this.app.use(this.getRouteUri('car-ad'), carAdRouter)
+		this.app.use(this.getRouteUri('car'), carRouter)
 	}
 
 	private getRouteUri(resourceName: string) {

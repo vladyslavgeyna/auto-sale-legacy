@@ -31,8 +31,6 @@ export default interface CreateCarAdInputDto {
 
 	price: number
 
-	currencyId: number
-
 	wheelDrive: WheelDrive
 
 	numberOfSeats: number

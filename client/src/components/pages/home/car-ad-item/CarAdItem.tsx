@@ -30,9 +30,7 @@ const CarAdItem: FC<{ carAd: ICarAdData }> = ({ carAd }) => {
 							{carAd.title}
 						</Link>
 					</h3>
-					<div className={styles.price}>
-						{carAd.price} {carAd.currencySign}
-					</div>
+					<div className={styles.price}>{carAd.price} $</div>
 					<div className={styles.infoWrapper}>
 						<div className={styles.info}>
 							<BsSpeedometer />
