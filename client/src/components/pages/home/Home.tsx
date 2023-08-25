@@ -39,6 +39,7 @@ const Home = () => {
 		yearFrom: Number(searchParams.get('yearFrom')) || undefined,
 		yearTo: Number(searchParams.get('yearTo')) || undefined
 	})
+	console.log('data', data)
 
 	const {
 		data: regionsData,

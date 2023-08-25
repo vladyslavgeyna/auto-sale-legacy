@@ -160,6 +160,11 @@ export const FilterSortingModal: FC<{
 		setYearToArray(getYearArray(Number(value)))
 	}
 
+	const handleCarBrandIdSelect = (value: string) => {
+		setSelectedCarModel('')
+		setSelectedCarBrand(value)
+	}
+
 	const { setCurrentPage } = useActions()
 
 	return (
@@ -175,7 +180,7 @@ export const FilterSortingModal: FC<{
 							defaultValue=''
 							name={'carBrandId'}
 							value={selectedCarBrand}
-							onChange={setSelectedCarBrand}>
+							onChange={handleCarBrandIdSelect}>
 							<option value={''} disabled>
 								Brand
 							</option>
