@@ -1,5 +1,5 @@
 export enum Fuel {
-	Diesel,
+	Diesel = 1,
 	Gas,
 	Gasoline,
 	'Gas and gasoline',

@@ -1,5 +1,5 @@
 export enum CarAdsOrderByOptions {
-	'By default',
+	'By default' = 1,
 	'From cheap to expensive',
 	'From expensive to cheap',
 	'Year of production, ascending',

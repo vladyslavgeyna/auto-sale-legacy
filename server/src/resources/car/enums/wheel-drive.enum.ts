@@ -1,5 +1,5 @@
 export enum WheelDrive {
-	Front,
+	Front = 1,
 	Rear,
 	All
 }

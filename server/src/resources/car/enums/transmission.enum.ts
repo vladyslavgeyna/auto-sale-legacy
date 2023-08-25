@@ -1,5 +1,5 @@
 export enum Transmission {
-	Manual,
+	Manual = 1,
 	Automatic,
 	CVT,
 	'Dual clutch'

@@ -1,5 +1,5 @@
 export enum Region {
-	Cherkasy,
+	Cherkasy = 1,
 	Chernihiv,
 	Chernivtsi,
 	Dnipropetrovsk,
