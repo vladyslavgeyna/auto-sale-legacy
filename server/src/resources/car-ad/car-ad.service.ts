@@ -3,10 +3,14 @@ import carImageService from '@resources/car-image/car-image.service'
 import CreateCarImageInputDto from '@resources/car-image/dtos/create-car-image-input.dto'
 import carService from '@resources/car/car.service'
 import CreateCarInputDto from '@resources/car/dtos/create-car-input.dto'
+import { Color } from '@resources/car/enums/color.enum'
 import { Fuel } from '@resources/car/enums/fuel.enum'
+import { Region } from '@resources/car/enums/region.enum'
 import { Transmission } from '@resources/car/enums/transmission.enum'
 import { WheelDrive } from '@resources/car/enums/wheel-drive.enum'
 import imageService from '@resources/image/image.service'
+import HttpError from '@utils/exceptions/http.error'
+import { getFormattedDate } from '@utils/utils'
 import {
 	Between,
 	FindManyOptions,
@@ -18,6 +22,7 @@ import {
 import { CarAd } from './car-ad.entity'
 import CreateCarAdInputDto from './dtos/create-car-ad-input.dto'
 import { CarAdDto, GetAllCarAdsResponse } from './dtos/get-all-car-ads-response'
+import { GetByIdCarAdResponse } from './dtos/get-by-id-car-ad-response'
 import { CarAdsOrderByOptions } from './enums/car-ad-order-by-options.enum'
 
 class CarAdService {
@@ -76,6 +81,99 @@ class CarAdService {
 		}
 
 		return createdCarAd
+	}
+
+	async getById(id: number): Promise<GetByIdCarAdResponse> {
+		const carAdFromDb = await this.carAdRepository.findOne({
+			where: {
+				id
+			},
+			relations: {
+				car: {
+					carBrand: true,
+					carModel: true,
+					carImages: {
+						image: true
+					}
+				},
+				user: {
+					image: true
+				}
+			},
+			order: {
+				car: {
+					carImages: {
+						isMain: 'DESC'
+					}
+				}
+			},
+			select: {
+				id: true,
+				title: true,
+				text: true,
+				dateOfCreation: true,
+				user: {
+					id: true
+				},
+				car: {
+					carBrand: {
+						name: true
+					},
+					carModel: {
+						name: true
+					},
+					color: true,
+					region: true,
+					yearOfProduction: true,
+					numberOfSeats: true,
+					additionalOptions: true,
+					engineCapacity: true,
+					price: true,
+					transmission: true,
+					wheelDrive: true,
+					fuel: true,
+					mileage: true,
+					carImages: {
+						id: true,
+						isMain: true,
+						image: {
+							name: true
+						}
+					}
+				}
+			}
+		})
+
+		if (!carAdFromDb) {
+			throw HttpError.NotFound(`Car ad with id ${id} was not found`)
+		}
+
+		const carAd: GetByIdCarAdResponse = {
+			id: carAdFromDb.id,
+			additionalOptions: carAdFromDb.car.additionalOptions,
+			carBrand: carAdFromDb.car.carBrand.name,
+			carModel: carAdFromDb.car.carModel.name,
+			engineCapacity: carAdFromDb.car.engineCapacity,
+			fuel: Fuel[carAdFromDb.car.fuel],
+			transmission: Transmission[carAdFromDb.car.transmission],
+			wheelDrive: WheelDrive[carAdFromDb.car.wheelDrive],
+			color: Color[carAdFromDb.car.wheelDrive],
+			region: Region[carAdFromDb.car.wheelDrive],
+			mileage: carAdFromDb.car.mileage,
+			title: carAdFromDb.title,
+			text: carAdFromDb.text,
+			price: carAdFromDb.car.price,
+			images: carAdFromDb.car.carImages.map(
+				carImage =>
+					`${process.env.API_URL}/images/${carImage.image.name}`
+			),
+			yearOfProduction: carAdFromDb.car.yearOfProduction,
+			numberOfSeats: carAdFromDb.car.numberOfSeats,
+			dateOfCreation: getFormattedDate(carAdFromDb.dateOfCreation),
+			userId: carAdFromDb.user.id
+		}
+
+		return carAd
 	}
 
 	async getAll(

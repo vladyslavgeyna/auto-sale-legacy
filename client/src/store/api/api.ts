@@ -40,6 +40,7 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 }
 
 export const api = createApi({
+	tagTypes: ['FavoriteAd', 'CarComparison'],
 	baseQuery: baseQueryWithReauth,
 	endpoints: builder => ({})
 })

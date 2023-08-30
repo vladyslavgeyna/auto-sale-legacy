@@ -1,6 +1,6 @@
 import HttpError from '@utils/exceptions/http.error'
 import { RequestWithBody, RequestWithQuery } from '@utils/types/request.type'
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import carAdService from './car-ad.service'
 import CreateCarAdInputDto from './dtos/create-car-ad-input.dto'
 import { GetAllCarAdsInputDto } from './dtos/get-all-car-ad-input.dto'
@@ -20,6 +20,15 @@ class CarAdController {
 			const createdCarAd = await carAdService.create(req.body, images)
 
 			return res.json(createdCarAd)
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async getById(req: Request, res: Response, next: NextFunction) {
+		try {
+			const carAd = await carAdService.getById(Number(req.params.id))
+			res.json(carAd)
 		} catch (error) {
 			next(error)
 		}

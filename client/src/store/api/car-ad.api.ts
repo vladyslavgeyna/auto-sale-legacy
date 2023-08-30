@@ -1,3 +1,4 @@
+import { IGetCarAdResponse } from '../../types/car-ad/get-car-ad-response.interface'
 import { IGetCarAdsResponse } from '../../types/car-ad/get-car-ads-response.interface'
 import { api } from './api'
 
@@ -42,8 +43,11 @@ export const carAdApi = api.injectEndpoints({
 					url
 				}
 			}
+		}),
+		getCarAd: builder.query<IGetCarAdResponse, number>({
+			query: carAdId => `/car-ad/${carAdId}`
 		})
 	})
 })
 
-export const { useGetCarAdsQuery } = carAdApi
+export const { useGetCarAdsQuery, useGetCarAdQuery } = carAdApi

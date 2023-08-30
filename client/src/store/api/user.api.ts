@@ -2,6 +2,7 @@ import { IAuthResponse } from '../../types/user/auth-response.interface'
 import { ILoginInput } from '../../types/user/login-input.interface'
 import { IRegisterInput } from '../../types/user/register-input.interface'
 import { IRegisterResponse } from '../../types/user/register-response.interface'
+import { IUser } from '../../types/user/user.interface'
 import { api } from './api'
 
 export const userApi = api.injectEndpoints({
@@ -20,6 +21,9 @@ export const userApi = api.injectEndpoints({
 				url: '/account/logout',
 				method: 'POST'
 			})
+		}),
+		getUser: builder.query<IUser, string>({
+			query: userId => `/user/${userId}`
 		}),
 		register: builder.mutation<IRegisterResponse, IRegisterInput>({
 			query: credentials => {
@@ -47,5 +51,9 @@ export const userApi = api.injectEndpoints({
 	})
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
-	userApi
+export const {
+	useLoginMutation,
+	useRegisterMutation,
+	useLogoutMutation,
+	useGetUserQuery
+} = userApi

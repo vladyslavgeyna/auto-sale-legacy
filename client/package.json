@@ -25,7 +25,8 @@
     "react-router-dom": "^6.15.0",
     "react-spinner-animated": "^3.1.1",
     "react-transition-group": "^4.4.5",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "swiper": "^10.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

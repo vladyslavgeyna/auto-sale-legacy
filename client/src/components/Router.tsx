@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import RequireNotAuth from './helpers/RequireNotAuth'
 import Layout from './layout/Layout'
+import CarAdView from './pages/car-ad-view/CarAdView'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import NotFound from './pages/not-found/NotFound'
@@ -31,9 +32,8 @@ const Router = () => {
 						/>
 						<Route element={<NotFound />} path='*' />
 					</Route>
-
+					<Route element={<CarAdView />} path='car-ad/view/:id' />
 					<Route element={<hr />} path='shosh' />
-
 					<Route element={<NotFound />} path='*' />
 				</Route>
 			</Routes>

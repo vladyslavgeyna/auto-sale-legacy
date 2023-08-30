@@ -14,6 +14,10 @@ class UserService {
 	async getById(id: string) {
 		const user = await this.userRepository.findOneBy({ id })
 
+		if (!user) {
+			throw HttpError.NotFound('User not found')
+		}
+
 		return user
 	}
 

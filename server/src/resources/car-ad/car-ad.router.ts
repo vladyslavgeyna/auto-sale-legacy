@@ -22,4 +22,6 @@ router.post(
 
 router.get('/', carAdController.getAll)
 
+router.get('/:id', carAdController.getById)
+
 export default router

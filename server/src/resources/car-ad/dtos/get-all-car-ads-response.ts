@@ -1,4 +1,5 @@
-export class CarAdDto {
+export interface CarAdDto {
+	id: number
 	title: string
 	price: number
 	mileage: number
