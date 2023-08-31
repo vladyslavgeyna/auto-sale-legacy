@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/count-by-car-ad/:carAdId', favoriteAdController.getCountByCarAdId)
 
-router.post('/toggle', favoriteAdController.toggle)
+router.post('/toggle', requireAuthMiddleware, favoriteAdController.toggle)
 
 router.get(
 	'/has-user-by-car-ad/:carAdId',

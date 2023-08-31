@@ -1,3 +1,12 @@
+@import '../../../../assets/styles/variables.scss';
+
 .image {
+	object-fit: cover;
 	width: 100% !important;
+	height: 100% !important;
+	border-radius: $border-radius;
+}
+.slider {
+	border-radius: $border-radius;
+	height: 550px;
 }

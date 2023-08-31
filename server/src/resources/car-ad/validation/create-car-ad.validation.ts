@@ -18,8 +18,8 @@ export const createCarAdValidation = [
 		.trim()
 		.notEmpty()
 		.escape()
-		.isLength({ min: 10, max: 700 })
-		.withMessage(`Text length should be 5 - 700 characters`),
+		.isLength({ min: 10, max: 1000 })
+		.withMessage(`Text length should be 5 - 1000 characters`),
 	body('additionalOptions')
 		.trim()
 		.escape()
@@ -136,9 +136,5 @@ export const createCarAdValidation = [
 		.trim()
 		.notEmpty()
 		.escape()
-		.withMessage('Invalid main image'),
-	(req: any, res: any, next: any) => {
-		console.log('createCarAdValidation')
-		next()
-	}
+		.withMessage('Invalid main image')
 ]

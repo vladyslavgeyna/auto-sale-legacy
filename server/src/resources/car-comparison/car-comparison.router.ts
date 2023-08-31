@@ -4,7 +4,7 @@ import carComparisonController from './car-comparison.controller'
 
 const router = Router()
 
-router.post('/toggle', carComparisonController.toggle)
+router.post('/toggle', requireAuthMiddleware, carComparisonController.toggle)
 
 router.get(
 	'/has-user-by-car-ad/:carAdId',

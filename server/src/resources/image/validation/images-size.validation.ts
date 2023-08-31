@@ -4,8 +4,6 @@ import { NextFunction, Request, Response } from 'express'
 export const imagesSizeValidation =
 	(maxSizeInMB: number) =>
 	(req: Request, res: Response, next: NextFunction) => {
-		console.log('imagesSizeValidation')
-
 		const images = req.files
 
 		if (!images || images.length === 0 || !(images instanceof Array)) {

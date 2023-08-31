@@ -18,12 +18,11 @@
 	gap: 30px;
 }
 .left {
-	// flex: 0 0 30%;
 	width: 30%;
 }
 .right {
-	// flex: 0 0 70%;
 	width: 70%;
+	margin-bottom: 30px;
 }
 .price {
 	padding: 10px 15px;
@@ -107,4 +106,30 @@
 	gap: 10px;
 	font-size: 14px;
 	padding: 10px;
+}
+.table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 17px;
+	text-align: left;
+	th {
+		padding: 10px 20px 10px 0;
+		border-bottom: 1px solid #c9c9c9;
+	}
+	td {
+		padding: 10px 0 10px 20px;
+		border-bottom: 1px solid #c9c9c9;
+	}
+}
+.aboutTitle {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 35px;
+}
+.adText {
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	font-size: 17px;
+	line-height: 24px;
 }

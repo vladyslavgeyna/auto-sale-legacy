@@ -9,8 +9,6 @@ export const imagesExtensionValidation = (
 	res: Response,
 	next: NextFunction
 ) => {
-	console.log('imagesExtensionValidation')
-
 	const images = req.files
 
 	if (!images || images.length === 0 || !(images instanceof Array)) {

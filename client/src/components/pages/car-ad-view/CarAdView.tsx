@@ -151,7 +151,7 @@ const CarAdView = () => {
 	}
 
 	const isUserAuthAndNotUserAd =
-		isAuthenticated && currentUser.id === data.userId
+		isAuthenticated && currentUser.id !== data.userId
 
 	const handleToggleToFavorites = async () => {
 		await toggleToFavorites({ userId: currentUser.id, carAdId: data.id })
@@ -260,6 +260,84 @@ const CarAdView = () => {
 					<div>
 						<Slider images={data.images} />
 					</div>
+					<div className={styles.aboutTitle}>About the car:</div>
+					<table className={styles.table}>
+						<tbody>
+							<tr>
+								<th scope='row'>Brand</th>
+								<td>{data.carBrand}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Model</th>
+								<td>{data.carModel}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Year of production</th>
+								<td>{data.yearOfProduction}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Mileage</th>
+								<td>{data.mileage} thousand km.</td>
+							</tr>
+							<tr>
+								<th scope='row'>Transmission</th>
+								<td>{data.transmission}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Fuel</th>
+								<td>{data.fuel}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Engine capacity</th>
+								<td>
+									{data.engineCapacity}{' '}
+									{data.fuel === 'Electric' ? 'kW' : 'liters'}
+								</td>
+							</tr>
+							<tr>
+								<th scope='row'>Wheel drive</th>
+								<td>{data.wheelDrive}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Color</th>
+								<td
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '10px'
+									}}>
+									{data.color}{' '}
+									<span
+										style={{
+											width: '15px',
+											height: '15px',
+											backgroundColor:
+												data.color === 'Multicolored'
+													? 'white'
+													: data.color
+										}}></span>
+								</td>
+							</tr>
+							<tr>
+								<th scope='row'>Number of seats</th>
+								<td>{data.numberOfSeats}</td>
+							</tr>
+							<tr>
+								<th scope='row'>Additional options</th>
+								<td>
+									{data.additionalOptions || 'Not specified'}
+								</td>
+							</tr>
+							<tr>
+								<th scope='row'>Location</th>
+								<td>{data.region}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div className={styles.aboutTitle}>
+						Description of the car from the seller:
+					</div>
+					<div className={styles.adText}>{data.text}</div>
 				</div>
 			</div>
 		</div>

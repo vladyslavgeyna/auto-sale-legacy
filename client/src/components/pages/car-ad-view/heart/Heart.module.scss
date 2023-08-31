@@ -1,4 +1,10 @@
+@import '../../../../assets/styles/variables.scss';
+
 .heart {
+	transition: $transition;
 	color: red;
 	cursor: pointer;
+}
+.heart:active {
+	transform: scale(0.8);
 }
