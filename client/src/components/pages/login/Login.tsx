@@ -1,12 +1,17 @@
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import {
+	Link,
+	useLocation,
+	useNavigate,
+	useSearchParams
+} from 'react-router-dom'
 import { useActions } from '../../../hooks/useActions'
 import { useGetFormError } from '../../../hooks/useGetFormError'
 import { useLoginMutation } from '../../../store/api/user.api'
 import { ILoginInput } from '../../../types/user/login-input.interface'
 import { EMAIL_REGEXP } from '../../../utils/validation'
-import Error from '../../Error/Error'
+import Error from '../../error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import FloatInput from '../../ui/float-input/FloatInput'
 import FormErrorMessage from '../../ui/form-error-message/FormErrorMessage'
@@ -27,6 +32,9 @@ const Login = () => {
 
 	const navigate = useNavigate()
 
+	const location = useLocation()
+	const redirectPath = location.state?.path || '/'
+
 	const { setCredentials } = useActions()
 
 	const onSubmit: SubmitHandler<ILoginInput> = async loginInputData => {
@@ -41,7 +49,9 @@ const Login = () => {
 		if (data && isSuccess) {
 			reset()
 			setCredentials(data)
-			navigate('/')
+			navigate(redirectPath, {
+				replace: true
+			})
 		}
 	}, [data, isSuccess])
 

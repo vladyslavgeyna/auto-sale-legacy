@@ -1,9 +1,11 @@
 import { FC, PropsWithChildren } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import BarLoader from '../ui/bar-loader/BarLoader'
 
-const RequireNotAuth: FC<PropsWithChildren> = ({ children }) => {
+const RequireAuth: FC<PropsWithChildren> = ({ children }) => {
+	const location = useLocation()
+
 	const { isAuthenticated, isLoading, isCheckingAuthFinished } =
 		useTypedSelector(state => state.user)
 
@@ -11,11 +13,16 @@ const RequireNotAuth: FC<PropsWithChildren> = ({ children }) => {
 		return <BarLoader text='Loading...' />
 	}
 
-	if (isAuthenticated && isCheckingAuthFinished) {
-		return <Navigate to={'/'} />
+	if (!isAuthenticated && isCheckingAuthFinished) {
+		return (
+			<Navigate
+				to={'/account/login'}
+				state={{ path: location.pathname }}
+			/>
+		)
 	}
 
 	return children
 }
 
-export default RequireNotAuth
+export default RequireAuth

@@ -36,6 +36,9 @@ const Header = () => {
 						<NavLink className={styles.navlink} to={'/'}>
 							Home
 						</NavLink>
+						<NavLink className={styles.navlink} to={'/test'}>
+							Test
+						</NavLink>
 						<div className={styles.blockChild}>
 							<div className={styles.linksWrapper}>
 								{isLoading || !isCheckingAuthFinished ? (

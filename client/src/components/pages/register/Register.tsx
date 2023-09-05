@@ -10,7 +10,7 @@ import {
 	PHONE_NUMBER_REGEXP,
 	validateImage
 } from '../../../utils/validation'
-import Error from '../../Error/Error'
+import Error from '../../error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import FloatInput from '../../ui/float-input/FloatInput'
 import FormErrorMessage from '../../ui/form-error-message/FormErrorMessage'

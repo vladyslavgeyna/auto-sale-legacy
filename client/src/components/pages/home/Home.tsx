@@ -10,7 +10,7 @@ import {
 	useGetOrderByOptionQuery,
 	useGetRegionsQuery
 } from '../../../store/api/car.api'
-import Error from '../../Error/Error'
+import Error from '../../error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import PrimaryButton from '../../ui/primary-button/PrimaryButton'
 import PrimaryTitle from '../../ui/primary-title/PrimaryTitle'

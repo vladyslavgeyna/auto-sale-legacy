@@ -18,7 +18,7 @@ import {
 	useToggleToFavoritesMutation
 } from '../../../store/api/favorite-ad.api'
 import { useGetUserQuery } from '../../../store/api/user.api'
-import Error from '../../Error/Error'
+import Error from '../../error/Error'
 import BarLoader from '../../ui/bar-loader/BarLoader'
 import PrimaryButton from '../../ui/primary-button/PrimaryButton'
 import PrimaryLink from '../../ui/primary-link/PrimaryLink'
@@ -227,7 +227,7 @@ const CarAdView = () => {
 								<div>
 									<PrimaryLink
 										className={styles.button}
-										to={'/'}>
+										to={`/user-review/create/${data.userId}`}>
 										<FaRegComment />
 										Leave a review
 									</PrimaryLink>

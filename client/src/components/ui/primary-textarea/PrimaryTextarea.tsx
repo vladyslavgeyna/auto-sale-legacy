@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import styles from './PrimaryInput.module.scss'
+import styles from './PrimaryTextarea.module.scss'
 
-const PrimaryInput: FC<{
+const PrimaryTextarea: FC<{
 	type?: React.HTMLInputTypeAttribute | undefined
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void
@@ -26,7 +26,7 @@ const PrimaryInput: FC<{
 }) => {
 	return (
 		<>
-			<input
+			<textarea
 				onBlur={onBlur}
 				required={required}
 				value={value}
@@ -36,10 +36,9 @@ const PrimaryInput: FC<{
 				type={type}
 				placeholder={placeholder}
 				id={id}
-				{...register}
-			/>
+				{...register}></textarea>
 		</>
 	)
 }
 
-export default PrimaryInput
+export default PrimaryTextarea
